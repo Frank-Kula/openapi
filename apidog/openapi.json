@@ -1,0 +1,19 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "S",
+    "description": "这里是 OAS 描述...",
+    "version": "1.0.0",
+    "x-ext-example": "这里是示例 OAS info 的扩展"
+  },
+  "tags": [],
+  "paths": {},
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "securitySchemes": {}
+  },
+  "servers": [],
+  "security": [],
+  "x-ext-example": "这里是示例 OAS 扩展"
+}
