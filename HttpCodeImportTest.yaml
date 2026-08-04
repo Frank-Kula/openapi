@@ -1,0 +1,133 @@
+openapi: 3.0.3
+info:
+  title: Full HTTP Status Code Test Spec
+  description: Test Spec for Github Scheduled Import non-2xx response skip bug
+  version: 1.0.0
+paths:
+  /status-test:
+    get:
+      summary: Full HTTP Status Code Verification Endpoint
+      responses:
+        '100':
+          description: 100 - Continue
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Continue"
+        '101':
+          description: 101 - Switching Protocols
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Switching Protocols"
+        '200':
+          description: 200 - OK Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  data:
+                    type: string
+                    example: "normal response"
+        '201':
+          description: 201 - Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    example: 123
+        '204':
+          description: 204 - No Content
+        '301':
+          description: 301 - Moved Permanently
+          headers:
+            Location:
+              schema:
+                type: string
+                example: "https://example.com/new"
+        '302':
+          description: 302 - Found Temporary Redirect
+          headers:
+            Location:
+              schema:
+                type: string
+                example: "https://example.com/temp"
+        '304':
+          description: 304 - Not Modified
+        '400':
+          description: 400 - Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResp'
+        '401':
+          description: 401 - Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResp'
+        '403':
+          description: 403 - Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResp'
+        '404':
+          description: 404 - Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResp'
+        '405':
+          description: 405 - Method Not Allowed
+        '409':
+          description: 409 - Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResp'
+        '422':
+          description: 422 - Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResp'
+        '500':
+          description: 500 - Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResp'
+        '502':
+          description: 502 - Bad Gateway
+        '503':
+          description: 503 - Service Unavailable
+        '504':
+          description: 504 - Gateway Timeout
+components:
+  schemas:
+    ErrorResp:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+        - code
+        - message
